@@ -1,0 +1,30 @@
+<h1>Employee Show Page</h1>
+
+<h2><%= @employee.name %></h2>
+<p>Department <%= @employee.department.name %></p>
+<h3>Tickets</h3>
+<% @employee.tickets_age_desc.each do |ticket| %>
+  <ul>
+    <li><%= ticket.subject %></li>
+  </ul>
+<% end %>
+
+<h2>Priority Ticket</h2>
+<div id="priority">
+<p><%= @employee.priority_ticket.subject %></p>
+</div>
+
+<h2>Add A Ticket For This Employee</h2>
+<%= form_with url: "/employee_tickets", method: :post do |f| %>
+  <%= f.label :ticket_id, "Ticket Id Number" %>
+  <%= f.number_field :ticket_id %>
+  <%= f.hidden_field :employee_id, value: @employee.id %>
+  <%= f.submit "Add" %>
+<% end %>
+
+<h2>Best Friends</h2>
+<ul id="best_friends">
+<% @employee.friends.each do |friend| %>
+  <li><%= friend %></li>
+<% end %>
+</ul>
